@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { GifGridItem } from "./GifGridItem";
 
 export const GifGrid = ({ category }) => {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    getGifs();
+  }, []);
+
   const getGifs = async () => {
     const url =
       "https://api.giphy.com/v1/gifs/search?q=rick+and+morthy&limit=10&api_key=G3x1V4VNTyP4snSskhcKfu11XFgJbUSw";
@@ -16,13 +23,16 @@ export const GifGrid = ({ category }) => {
     });
 
     console.log(gifs);
+    setImages(gifs);
   };
-
-  getGifs();
 
   return (
     <>
       <h3>{category}</h3>
+
+      {images.map((image) => {
+        return <GifGridItem key={image.id} {...image} />;
+      })}
     </>
   );
 };
