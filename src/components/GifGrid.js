@@ -1,30 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { GifGridItem } from "./GifGridItem";
+import { getGifs } from "../helpers/getGifs";
 
 export const GifGrid = ({ category }) => {
   const [images, setImages] = useState([]);
 
+  // useEffect(() => {
+  //   getGifs(category).then((imgs) => setImages(imgs));
+  // }, []);
+
   useEffect(() => {
-    getGifs();
-  }, []);
-
-  const getGifs = async () => {
-    const url =
-      "https://api.giphy.com/v1/gifs/search?q=rick+and+morthy&limit=10&api_key=G3x1V4VNTyP4snSskhcKfu11XFgJbUSw";
-    const resp = await fetch(url);
-    const { data } = await resp.json();
-
-    const gifs = data.map((img) => {
-      return {
-        id: img.id,
-        title: img.title,
-        url: img.images.downsized_medium.url,
-      };
-    });
-
-    console.log(gifs);
-    setImages(gifs);
-  };
+    // esta forma es usado cuando el primer argumento de la funcion es
+    // mandado como primer argumento a la otra funcion
+    getGifs(category).then(setImages);
+  }, [category]);
 
   return (
     <>
