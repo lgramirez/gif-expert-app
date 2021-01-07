@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas para GifGridItem debe mostar el componente correctamente (hacer match con un snapshot) 1`] = `
+<div
+  className="card animate__animated animate__fadeInRight"
+>
+  <img />
+  <p />
+</div>
+`;
