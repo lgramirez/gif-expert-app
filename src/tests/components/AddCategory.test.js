@@ -42,4 +42,23 @@ describe("Pruebas para <AddCategory />", () => {
     // creada por jest fue ejecutada
     expect(setCategories).not.toHaveBeenCalled();
   });
+
+  // tarea
+  test("Debe de llamar el setCategories y limpiar la caja de texto", () => {
+    const value = "Hola mundo cruel";
+
+    // 1. simular el inputChange
+    const input = wrapper.find("input");
+    input.simulate("change", { target: { value } });
+
+    // 2. simular el submit
+    const form = wrapper.find("form");
+    form.simulate("submit", { preventDefault: () => {} });
+
+    // 3. setCategories se debe de haber llamado
+    expect(setCategories).toHaveBeenCalled();
+
+    // 4. el valor del input debe de estar ''
+    expect(input.prop("value")).toBe("");
+  });
 });
